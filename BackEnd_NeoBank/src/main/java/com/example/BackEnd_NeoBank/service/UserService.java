@@ -23,8 +23,8 @@ public class UserService {
     }
 
     public Optional<User> loginUser(String emailOrNif, String rawPassword) {
-        return userRepository.findByEmailOrNif(emailOrNif, emailOrNif) // Busca por email ou NIF
-                .filter(user -> passwordEncoder.matches(rawPassword, user.getPassword())); // Valida a senha
+        return userRepository.findByEmailOrNif(emailOrNif, emailOrNif)
+                .filter(user -> passwordEncoder.matches(rawPassword, user.getPassword()));
     }
 
 
