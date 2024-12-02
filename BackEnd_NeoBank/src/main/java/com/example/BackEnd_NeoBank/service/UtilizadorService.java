@@ -14,12 +14,13 @@ public class UtilizadorService {
     private final UtilizadorRepository utilizadorRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Utilizador registerUser(Utilizador user) {
+    public void registerUser(Utilizador user) {
         if (utilizadorRepository.existsByEmail(user.getEmail()) || utilizadorRepository.existsByNif(user.getNif())) {
-            throw new IllegalArgumentException("Conta já criada!");
+            throw new IllegalArgumentException("Conta já existente!");
         }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return utilizadorRepository.save(user);
+        utilizadorRepository.save(user);
     }
 
     public Optional<Utilizador> loginUser(String emailOrNif, String rawPassword) {
@@ -28,7 +29,7 @@ public class UtilizadorService {
     }
 
 
-    public Utilizador updateUser(Long id, Utilizador updatedUser) {
+    public void updateUser(Long id, Utilizador updatedUser) {
         Utilizador existingUser = utilizadorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado"));
         existingUser.setNome(updatedUser.getNome());
@@ -37,7 +38,7 @@ public class UtilizadorService {
         existingUser.setEmail(updatedUser.getEmail());
         existingUser.setNumeroTelemovel(updatedUser.getNumeroTelemovel());
 
-        return utilizadorRepository.save(existingUser);
+        utilizadorRepository.save(existingUser);
     }
 
     public Utilizador getUser(Long id) {
