@@ -1,0 +1,33 @@
+/* Impede que o corpo da página tenha rolagem global */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Desativa a rolagem global */
+  }
+  
+  /* Layout geral da página, com flexbox */
+  .d-flex {
+    height: 100vh; /* Altura total da tela */
+    display: flex;
+    flex-direction: row; /* Coloca os itens lado a lado */
+    margin-top: 60px; /* Espaço para o cabeçalho fixo */
+  }
+  
+  /* Componente Lista (lado esquerdo) */
+  .lista-container {
+    width: 250px; /* Largura da lista */
+    height: calc(100vh - 60px); /* Altura total da tela menos a altura do cabeçalho */
+    background-color: #f8f9fa; /* Cor de fundo */
+    border-right: 1px solid #dee2e6; /* Borda de separação */
+    overflow-y: auto; /* Permite rolar na lista se o conteúdo for maior */
+  }
+  
+  /* Componente Principal (lado direito) */
+  .flex-grow-1 {
+    flex-grow: 1; /* O conteúdo principal ocupa o restante do espaço */
+    background-color: #ffffff;
+    overflow-y: auto; /* Permite rolar no conteúdo principal */
+    padding: 20px; /* Espaçamento interno */
+    height: calc(100vh - 60px); /* Altura do conteúdo principal ajustada */
+  }
+  

@@ -1,0 +1,20 @@
+/* Evita rolagem global, mas permite na área principal */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  /* Componente Principal (lado direito) */
+  .flex-grow-1 {
+    flex-grow: 1;
+    overflow-y: auto; /* Permite rolar no conteúdo principal */
+    padding: 20px;
+    height: calc(100vh - 60px); /* Ajusta a altura da área principal */
+  }
+  
+  /* Estilo do conteúdo do componente Principal */
+  .container {
+    padding-top: 20px;
+  }
+  
