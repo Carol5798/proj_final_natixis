@@ -1,1 +1,61 @@
-<p>registo works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Conta</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4 shadow-lg" style="width: 100%; max-width: 500px;">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Registrar Conta</h2>
+                <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nome de Usuário</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome de usuário" [(ngModel)]="username" required>
+                    </div>
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" [(ngModel)]="email" required>
+                    </div>
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" [(ngModel)]="password" required (input)="checkPasswordStrength()">
+                        <small id="password-strength" class="form-text" [ngClass]="passwordStrengthClass">{{ passwordStrengthMessage }}</small>
+                    </div>
+                    <!-- Confirm Password -->
+                    <div class="mb-3">
+                        <label for="confirm-password" class="form-label">Confirmar Senha</label>
+                        <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Confirme sua senha" [(ngModel)]="confirmPassword" required (input)="checkPasswordMatch()">
+                        <small id="password-match" class="form-text" [ngClass]="passwordMatchClass">{{ passwordMatchMessage }}</small>
+                    </div>
+                    <!-- Phone -->
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Digite seu telefone" [(ngModel)]="phone" required>
+                    </div>
+                    <!-- NIF -->
+                    <div class="mb-3">
+                        <label for="nif" class="form-label">NIF</label>
+                        <input type="text" class="form-control" id="nif" name="nif" placeholder="Digite seu NIF" [(ngModel)]="nif" required>
+                    </div>
+                    <!-- Address -->
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Morada</label>
+                        <textarea class="form-control" id="address" rows="3" name="address" placeholder="Digite sua morada" [(ngModel)]="address" required></textarea>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="!isFormValid()" (click)="onSubmit()">Registrar</button>
+                </form>
+                <div class="text-center mt-3">
+                    <span>Já tem uma conta? <a [routerLink]="['/login']" class="text-decoration-none">Entrar</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

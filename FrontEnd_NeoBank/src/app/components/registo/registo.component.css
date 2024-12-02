@@ -1,0 +1,92 @@
+/* Set basic styling for the body and html to ensure full viewport height */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background color */
+  }
+  
+  /* Center the form card vertically and horizontally */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+  }
+  
+  /* Style the card that holds the form */
+  .card {
+    width: 100%;
+    max-width: 500px; /* Limits the form width on large screens */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    background-color: white;
+  }
+  
+  /* Title styling */
+  .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; /* Dark text color */
+  }
+  
+  /* Form input styling */
+  .form-control {
+    border-radius: 4px; /* Rounded input corners */
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  /* Adjust small text for password strength and match indicators */
+  .form-text {
+    font-size: 12px;
+    color: #6c757d; /* Light grey color for helper text */
+  }
+  
+  .form-text.text-success {
+    color: #28a745; /* Green for success message */
+  }
+  
+  .form-text.text-danger {
+    color: #dc3545; /* Red for error message */
+  }
+  
+  /* Button styling */
+  .btn {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
+  .btn-primary {
+    background-color: #076307; /* Use your primary color */
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #064c04; /* Darker shade for hover effect */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    /* Adjust padding and text size on small screens */
+    .card {
+        width: 100%;
+      padding: 15px;
+    }
+  
+    .card-title {
+      font-size: 20px;
+    }
+  
+    .form-control {
+      font-size: 14px;
+    }
+  
+    .btn {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  

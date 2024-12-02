@@ -1,0 +1,48 @@
+/* Style the checkbox container */
+.form-check {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+  }
+  
+  /* Style the actual checkbox */
+  .form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    appearance: none; /* Remove default checkbox appearance */
+    border: 2px solid #076307;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* When the checkbox is checked, show a checkmark */
+  .form-check-input:checked {
+    background-color: #076307;
+    border-color: #076307;
+  }
+  
+  /* Add checkmark icon inside the checkbox when it's selected */
+  .form-check-input:checked::after {
+
+    position: absolute;
+    top: -2px;
+    left: 4px;
+    font-size: 16px;
+    color: white;
+  }
+  
+  /* Style the label text */
+  .form-check-label {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  /* Optional: Add hover effect for the label */
+  .form-check-label:hover {
+    color: #076307;
+  }
+  
