@@ -1,1 +1,44 @@
-<p>transacao works!</p>
+<div class="container">
+    <div class="card p-4 shadow-lg" style="width: 100%; max-width: 500px;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Transação</h2>
+            <form (ngSubmit)="onSubmit()">
+                <!-- Transaction Type Dropdown -->
+                <div class="mb-3">
+                    <label for="transactionType" class="form-label">Tipo de Transação</label>
+                    <select class="form-control" id="transactionType" [(ngModel)]="transactionType" name="transactionType" required>
+                        <option value="" disabled selected>Selecione o tipo de transação</option>
+                        <option value="transfer">Transferência</option>
+                        <option value="payment">Pagamento de Serviços</option>
+                    </select>
+                </div>
+
+                <!-- Transfer Account Number (only if transfer is selected) -->
+                <div *ngIf="transactionType === 'transfer'" class="mb-3">
+                    <label for="accountNumber" class="form-label">Número da Conta de Destino</label>
+                    <input type="text" class="form-control" id="accountNumber" [(ngModel)]="accountNumber" name="accountNumber" placeholder="Digite o número da conta" required>
+                </div>
+
+                <!-- Payment Entity and Reference (only if payment is selected) -->
+                <div *ngIf="transactionType === 'payment'" class="mb-3">
+                    <label for="entity" class="form-label">Entidade</label>
+                    <input type="text" class="form-control" id="entity" [(ngModel)]="entity" name="entity" placeholder="Digite a entidade" required>
+                </div>
+
+                <div *ngIf="transactionType === 'payment'" class="mb-3">
+                    <label for="referenceNumber" class="form-label">Número de Referência</label>
+                    <input type="text" class="form-control" id="referenceNumber" [(ngModel)]="referenceNumber" name="referenceNumber" placeholder="Digite o número de referência" required>
+                </div>
+
+                <!-- Amount Field -->
+                <div *ngIf="transactionType" class="mb-3">
+                    <label for="amount" class="form-label">Valor (€)</label>
+                    <input type="number" class="form-control" id="amount" [(ngModel)]="amount" name="amount" placeholder="Digite o valor (€)" required>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary w-100">Confirmar Transação</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@ import com.example.BackEnd_NeoBank.service.ContaService;
 import com.example.BackEnd_NeoBank.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
@@ -17,9 +18,11 @@ public class ContaController {
 
 
     @PostMapping("/criar")
-    public ResponseEntity<ApiResponse> criarConta(@RequestParam String nif) {
+    public ResponseEntity<ApiResponse> criarConta() {
         try {
-            _contaService.criarConta(nif, "", 1);
+            String authenticatedEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            _contaService.criarConta(authenticatedEmail, "", 1);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ApiResponse(true, "Conta criada com sucesso."));
         } catch (IllegalArgumentException e) {
@@ -34,10 +37,12 @@ public class ContaController {
         }
     }
 
-    @GetMapping("/obterContaPorNif")
-    public ResponseEntity<ApiResponse> obterContaPorNif(@RequestParam String nif) {
+    @GetMapping("/obterInformacaoConta")
+    public ResponseEntity<ApiResponse> obterInformacaoConta() {
         try {
-            ApiResponse response = _contaService.obterContaPorNif(nif);
+            String authenticatedEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            ApiResponse response = _contaService.obterContaPorEmail(authenticatedEmail);
             return ResponseEntity.ok(response); // Retorna 200 OK
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

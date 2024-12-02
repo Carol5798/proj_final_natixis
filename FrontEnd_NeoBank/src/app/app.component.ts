@@ -14,3 +14,4 @@ import { PrincipalComponent } from './components/principal/principal.component';
 export class AppComponent {
   title = 'FrontEnd_NeoBank';
 }
+ 

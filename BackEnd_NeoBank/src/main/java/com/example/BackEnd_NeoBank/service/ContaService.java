@@ -17,9 +17,9 @@ public class ContaService {
     private final UtilizadorRepository _utilizadorRepository;
 
 
-    public ContaBancaria criarConta(String nif, String entidade, int tipoConta) {
+    public ContaBancaria criarConta(String email, String entidade, int tipoConta) {
         // Verificar se o utilizador existe
-        Utilizador utilizador = _utilizadorRepository.findByNif(nif)
+        Utilizador utilizador = _utilizadorRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado"));
 
         // Verificar se o utilizador já tem uma conta associada
@@ -44,10 +44,10 @@ public class ContaService {
         return _contaRepository.save(novaConta);
     }
 
-    public ApiResponse obterContaPorNif(String nif) {
+    public ApiResponse obterContaPorEmail(String email) {
 
         // Verificar se o utilizador existe
-        Utilizador utilizador = _utilizadorRepository.findByNif(nif)
+        Utilizador utilizador = _utilizadorRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado."));
 
         ContaBancaria conta = _contaRepository.findByUtilizador_Id(utilizador.id)

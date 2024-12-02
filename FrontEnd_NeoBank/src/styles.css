@@ -1,1 +1,127 @@
-/* You can add global styles to this file, and also import other style files */
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+    color: #333; /* Neutral text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Root Colors */
+:root {
+    --primary-color: #076307; /* Deep green */
+    --secondary-color: #ffffff; /* White */
+    --hover-color: #054c05; /* Darker green for hover */
+    --text-color: #333333; /* Neutral text */
+    --light-gray: #e9ecef; /* Light gray for borders or background highlights */
+}
+
+/* Card */
+.card {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: var(--primary-color);
+}
+
+/* Form Elements */
+.form-label {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.form-control {
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(7, 99, 7, 0.5);
+    outline: none;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: var(--hover-color);
+}
+
+.btn-check:checked + .btn {
+    background-color: var(--hover-color);
+    color: var(--secondary-color);
+}
+
+/* Text Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--hover-color);
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.vh-100 {
+    height: 100vh;
+}
+
+.p-4 {
+    padding: 1.5rem;
+}
+
+/* Responsive Design */
+/*
+@media (max-width: 576px) {
+    .card {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+
+    .form-control {
+        font-size: 13px;
+        padding: 8px;
+    }
+}*/
