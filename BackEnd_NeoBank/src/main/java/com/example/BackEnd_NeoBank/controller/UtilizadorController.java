@@ -1,7 +1,7 @@
 package com.example.BackEnd_NeoBank.controller;
 
-import com.example.BackEnd_NeoBank.entity.User;
-import com.example.BackEnd_NeoBank.service.UserService;
+import com.example.BackEnd_NeoBank.entity.Utilizador;
+import com.example.BackEnd_NeoBank.service.UtilizadorService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -13,20 +13,20 @@ import java.security.Key;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/utilizador")
 @RequiredArgsConstructor
-public class UserController {
-    private final UserService userService;
+public class UtilizadorController {
+    private final UtilizadorService utilizadorService;
 
 
     @PostMapping("/register")
-    public User postUser(@RequestBody User user) {
-        return userService.registerUser(user);
+    public Utilizador postUser(@RequestBody Utilizador user) {
+        return utilizadorService.registerUser(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestParam String emailOrNif, @RequestParam String password) {
-        return userService.loginUser(emailOrNif, password)
+        return utilizadorService.loginUser(emailOrNif, password)
                 .map(user -> {
                     String token = generateJwtToken(user);
                     return ResponseEntity.ok("Login bem-sucedido! Token: " + token);
@@ -34,7 +34,7 @@ public class UserController {
                 .orElse(ResponseEntity.status(401).body("Credenciais inválidas"));
     }
 
-    private String generateJwtToken(User user) {
+    private String generateJwtToken(Utilizador user) {
         String secretKey = "WuS9qRVgYo3DUCsO0Xw+vNAnaFbc2kjdmnf6mpYiBJuUM0o+btYjkIh0gdb+xk4u-n";
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
@@ -49,18 +49,18 @@ public class UserController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        return ResponseEntity.ok(userService.updateUser(id, user));
+    public ResponseEntity<Utilizador> updateUser(@PathVariable Long id, @RequestBody Utilizador user) {
+        return ResponseEntity.ok(utilizadorService.updateUser(id, user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
-        return ResponseEntity.ok(userService.getUser(id));
+    public ResponseEntity<Utilizador> getUser(@PathVariable Long id) {
+        return ResponseEntity.ok(utilizadorService.getUser(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+        utilizadorService.deleteUser(id);
         return ResponseEntity.ok("Utilizador apagado com sucesso");
     }
 }
