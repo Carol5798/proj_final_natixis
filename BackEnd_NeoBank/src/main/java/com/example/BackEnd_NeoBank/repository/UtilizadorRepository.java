@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface UtilizadorRepository extends JpaRepository<Utilizador, Long> {
     Optional<Utilizador> findByEmailOrNif(String email, String nif);
     Optional<Utilizador> findByNif(String nif);
+    Optional<Utilizador> findByEmail(String email);
     boolean existsByEmail(String email);
     boolean existsByNif(String nif);
 
