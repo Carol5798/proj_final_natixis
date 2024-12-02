@@ -1,0 +1,39 @@
+/* Garantir que o body e html ocupem toda a altura da tela */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Remove a rolagem global */
+  }
+  
+  /* Layout flexível para os componentes da página */
+  .d-flex {
+    display: flex;
+    height: 90vh; /* A altura total da tela */
+    flex-direction: row; /* Coloca os itens lado a lado */
+  }
+  
+  /* Componente Lista (lado esquerdo) */
+  .lista-container {
+    width: 250px; /* Largura da lista */
+    height: 100vh; /* Altura total da tela */
+    background-color: #0d365f; /* Cor de fundo */
+    position: fixed; /* Fixa a lista à esquerda */
+
+   
+  }
+  
+  /* Componente Principal (lado direito) */
+  .flex-grow-1 {
+    margin-left: 250px; /* Deixa espaço para a lista */
+    padding: 20px; /* Espaçamento interno */
+    height: calc(100vh - 60px); /* Ajusta a altura do conteúdo para ficar abaixo do cabeçalho */
+    overflow-y: hidden; /* Permite rolagem dentro do conteúdo principal */
+  }
+  
+  /* Para garantir que o conteúdo não fique embaixo do cabeçalho */
+  .app-lista-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
