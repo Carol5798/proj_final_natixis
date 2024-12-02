@@ -41,8 +41,11 @@ public class UtilizadorController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> loginUser(@RequestParam String emailOrNif, @RequestParam String password) {
+    public ResponseEntity<ApiResponse> loginUser(@RequestBody Map<String, String> loginData) {
         try {
+            String emailOrNif = loginData.get("emailOrNif");
+            String password = loginData.get("password");
+
             return utilizadorService.loginUser(emailOrNif, password)
                     .map(user -> {
                         String token = generateJwtToken(user);
