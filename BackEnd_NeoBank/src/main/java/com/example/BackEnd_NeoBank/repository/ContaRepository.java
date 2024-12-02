@@ -1,6 +1,7 @@
 package com.example.BackEnd_NeoBank.repository;
 
 import com.example.BackEnd_NeoBank.entity.ContaBancaria;
+import com.example.BackEnd_NeoBank.entity.Utilizador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,7 @@ public interface ContaRepository  extends JpaRepository<ContaBancaria, Long> {
 
     // Verificar se um IBAN já existe
     boolean existsByIban(String iban);
+
+    Optional<ContaBancaria> findByUtilizador_Id(Long idUtilizador);
 }
 

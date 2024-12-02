@@ -4,8 +4,11 @@ import com.example.BackEnd_NeoBank.entity.ContaBancaria;
 import com.example.BackEnd_NeoBank.entity.Utilizador;
 import com.example.BackEnd_NeoBank.repository.ContaRepository;
 import com.example.BackEnd_NeoBank.repository.UtilizadorRepository;
+import com.example.BackEnd_NeoBank.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -14,13 +17,13 @@ public class ContaService {
     private final UtilizadorRepository _utilizadorRepository;
 
 
-    public ContaBancaria criarConta(Long idUtilizador, String entidade, int tipoConta) {
+    public ContaBancaria criarConta(String nif, String entidade, int tipoConta) {
         // Verificar se o utilizador existe
-        Utilizador utilizador = _utilizadorRepository.findById(idUtilizador)
+        Utilizador utilizador = _utilizadorRepository.findByNif(nif)
                 .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado"));
 
         // Verificar se o utilizador já tem uma conta associada
-        if (_contaRepository.existsByUtilizador_Id(idUtilizador)) {
+        if (_contaRepository.existsByUtilizador_Id(utilizador.id)) {
             throw new IllegalStateException("O utilizador já tem uma conta associada");
         }
 
@@ -40,6 +43,28 @@ public class ContaService {
 
         return _contaRepository.save(novaConta);
     }
+
+    public ApiResponse obterContaPorNif(String nif) {
+
+        // Verificar se o utilizador existe
+        Utilizador utilizador = _utilizadorRepository.findByNif(nif)
+                .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado."));
+
+        ContaBancaria conta = _contaRepository.findByUtilizador_Id(utilizador.id)
+                .orElseThrow(() -> new IllegalArgumentException("Conta não encontrada para o NIF fornecido."));
+
+        // Criar um Map para o campo data
+        Map<String, Object> responseData = Map.of("conta", conta);
+
+        return new ApiResponse(true, "Conta encontrada com sucesso.", responseData);
+    }
+
+
+
+
+
+
+
 
     // Simulação da geração de um IBAN
     private String gerarIban(String entidade) {

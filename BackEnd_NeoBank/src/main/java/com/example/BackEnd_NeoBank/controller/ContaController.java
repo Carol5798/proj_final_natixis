@@ -5,10 +5,7 @@ import com.example.BackEnd_NeoBank.service.ContaService;
 import com.example.BackEnd_NeoBank.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
 
@@ -20,9 +17,9 @@ public class ContaController {
 
 
     @PostMapping("/criar")
-    public ResponseEntity<ApiResponse> criarConta(@RequestParam Long idUtilizador) {
+    public ResponseEntity<ApiResponse> criarConta(@RequestParam String nif) {
         try {
-            _contaService.criarConta(idUtilizador, "", 1);
+            _contaService.criarConta(nif, "", 1);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ApiResponse(true, "Conta criada com sucesso."));
         } catch (IllegalArgumentException e) {
@@ -37,6 +34,19 @@ public class ContaController {
         }
     }
 
+    @GetMapping("/obterContaPorNif")
+    public ResponseEntity<ApiResponse> obterContaPorNif(@RequestParam String nif) {
+        try {
+            ApiResponse response = _contaService.obterContaPorNif(nif);
+            return ResponseEntity.ok(response); // Retorna 200 OK
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(false, e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(false, "Erro ao obter a conta."));
+        }
+    }
 
 
 }

@@ -33,6 +33,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/utilizador/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/utilizador/register").permitAll()
+
+                        //Depois dos testes retirar e testar com as tokens
+                        .requestMatchers(HttpMethod.POST, "/conta/criar").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/conta/obterContaPorNif").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

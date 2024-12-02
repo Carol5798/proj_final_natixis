@@ -1,5 +1,6 @@
 package com.example.BackEnd_NeoBank.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class ContaBancaria {
 
     @ManyToOne
     @JoinColumn(name = "id_utilizador", nullable = false)
+    @JsonIgnore
     public Utilizador utilizador;
 
     public String iban;
