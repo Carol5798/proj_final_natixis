@@ -1,18 +1,14 @@
-/* Estilo para o cabeçalho */
-app-header {
-    height: 60px; /* Altura do cabeçalho */
-    background-color: rgb(207, 20, 20); /* Cor de fundo do cabeçalho */
-    color: rgb(117, 0, 0); /* Cor do texto */
-    padding: 10px;
-    text-align: center;
-    position: fixed; /* Fixa o cabeçalho no topo */
-    top: 0;
-    left: 0;
-    width: 100%; /* Ocupa toda a largura */
-    z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
-  }
-
-  .dropdown-menu {
-    z-index: 1055 !important;
-  }
-  
+:host {
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: white;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+}

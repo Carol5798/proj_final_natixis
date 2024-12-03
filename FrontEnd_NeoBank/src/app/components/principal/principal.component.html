@@ -1,62 +1,66 @@
-<div class="d-flex flex-column vh-100">
-  
-  
-      <!-- Página Principal -->
-      <div class="flex-grow-1 p-4">
-        <div class="container">
-          <div class="row">
-            <!-- Container 1: IBAN e Saldo -->
-            <div class="col-md-4">
-              <div class="card shadow-sm">
-                <div class="card-body text-center">
-                  <h5 class="card-title">Detalhes da Conta</h5>
-                  <hr>
-                  <p class="mb-2"><strong>IBAN:</strong></p>
-                  <p class="text-muted" id="iban">PT50 1234 5678 9101 1121 3141</p>
-                  <p class="mb-2"><strong>Saldo:</strong></p>
-                  <h4 class="text-success" id="saldo">€12,345.67</h4>
-                </div>
+<div class="layout-container">
+  <!-- Header fixo -->
+  <app-header></app-header>
+
+  <!-- Container principal -->
+  <div class="main-container">
+    <!-- Lista (sidebar à esquerda) -->
+    <div class="lista-container">
+      <app-lista></app-lista>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="principal-container">
+      <div class="container">
+        <div class="row">
+          <!-- Container 1: IBAN e Saldo -->
+          <div class="col-md-4">
+            <div class="card shadow-sm">
+              <div class="card-body text-center">
+                <h5 class="card-title">Detalhes da Conta</h5>
+                <hr />
+                <p class="mb-2"><strong>IBAN:</strong></p>
+                <p class="text-muted" id="iban">PT50 1234 5678 9101 1121 3141</p>
+                <p class="mb-2"><strong>Saldo:</strong></p>
+                <h4 class="text-success" id="saldo">€12,345.67</h4>
               </div>
             </div>
-  
-            <!-- Container 2: Movimentos -->
-            <div class="col-md-8">
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">Movimentos</h5>
-                  <hr>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Data</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Montante</th>
-                      </tr>
-                    </thead>
-                    <tbody id="movimentos">
-                      <tr>
-                        <td>01/12/2024</td>
-                        <td>Pagamento Supermercado</td>
-                        <td class="text-danger">- €50.00</td>
-                      </tr>
-                      <tr>
-                        <td>30/11/2024</td>
-                        <td>Transferência Recebida</td>
-                        <td class="text-success">+ €500.00</td>
-                      </tr>
-                      <tr>
-                        <td>29/11/2024</td>
-                        <td>Pagamento Ginásio</td>
-                        <td class="text-danger">- €30.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          </div>
+      
+          <!-- Container 2: Movimentos -->
+          <div class="col-md-8">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Movimentos</h5>
+                <hr />
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Data</th>
+                      <th scope="col">Descrição</th>
+                      <th scope="col">Montante</th>
+                    </tr>
+                  </thead>
+                  <tbody id="movimentos">
+                    <tr>
+                      <td>01/12/2024</td>
+                      <td>Pagamento Supermercado</td>
+                      <td class="text-danger">- €50.00</td>
+                    </tr>
+                    <tr>
+                      <td>30/11/2024</td>
+                      <td>Transferência Recebida</td>
+                      <td class="text-success">+ €500.00</td>
+                    </tr>
+                    <tr>
+                      <td>29/11/2024</td>
+                      <td>Pagamento Ginásio</td>
+                      <td class="text-danger">- €30.00</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-  
