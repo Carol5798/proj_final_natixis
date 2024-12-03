@@ -27,4 +27,6 @@ public class Utilizador {
     public String email;
 
     public String numeroTelemovel;
+
+    public int tipoUtilizador; //1-Normal, 2-Empresa
 }
