@@ -33,31 +33,31 @@ public class TransacaoController {
         }
     }
 
-    @PostMapping("/pagamento")
-    public ResponseEntity<ApiResponse> realizarPagamento(
-            @RequestParam String entidade,
-            @RequestParam String referencia,
-            @RequestParam float valor) {
-        try {
-            // Chama o serviço para realizar o pagamento
-            ApiResponse response = _transacaoService.realizarPagamento(entidade, referencia, valor);
-
-            // Retorna a resposta com o status adequado
-            if (response.success) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(response);
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-            }
-
-        } catch (IllegalArgumentException e) {
-            // Erros de validação ou outros problemas
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ApiResponse(false, e.getMessage()));
-        } catch (Exception e) {
-            // Erro genérico
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse(false, "Erro inesperado ao realizar o pagamento."));
-        }
-    }
+//    @PostMapping("/pagamento")
+//    public ResponseEntity<ApiResponse> realizarPagamento(
+//            @RequestParam String entidade,
+//            @RequestParam String referencia,
+//            @RequestParam float valor) {
+//        try {
+//            // Chama o serviço para realizar o pagamento
+//            ApiResponse response = _transacaoService.realizarPagamento(entidade, referencia, valor);
+//
+//            // Retorna a resposta com o status adequado
+//            if (response.success) {
+//                return ResponseEntity.status(HttpStatus.CREATED).body(response);
+//            } else {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+//            }
+//
+//        } catch (IllegalArgumentException e) {
+//            // Erros de validação ou outros problemas
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                    .body(new ApiResponse(false, e.getMessage()));
+//        } catch (Exception e) {
+//            // Erro genérico
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new ApiResponse(false, "Erro inesperado ao realizar o pagamento."));
+//        }
+//    }
 
 }

@@ -21,8 +21,9 @@ public class Transacao {
 
     public LocalDateTime data;
 
+    public String IbanContaDestino;
+
     public int tipo;// 1-TRANSFERENCIA_BANCARIA, 2 -PAGAMENTO
 
-    public boolean estado = true;
-
+    public int idPagamento;
 }
