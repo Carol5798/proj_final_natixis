@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthServiceService } from '../../services/auth-service.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -11,10 +12,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class LoginComponent {
 
-  credentials = { identifier: '', password: '' };
+  credentials = { emailOrNif: '', password: '' };
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthServiceService, private router: Router) {}
 
   login(): void {
     this.authService.login(this.credentials).subscribe({
