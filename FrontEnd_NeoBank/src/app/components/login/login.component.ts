@@ -22,7 +22,7 @@ export class LoginComponent {
       next: (response) => {
         if (response.success) {
           this.authService.saveToken(response.data.token);
-          this.router.navigate(['/dashboard']); // Redirect to a secured route
+          this.router.navigate(['/principal']); // Redirect to a secured route
         } else {
           this.handleError(response.message);
         }
