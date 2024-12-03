@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-<<<<<<< HEAD
-import { RouterLink, RouterLinkActive } from '@angular/router';
+
 import { PrincipalComponent } from '../principal/principal.component';
-=======
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
->>>>>>> 7952387680099300a81720930ba4cb88024ebeb0
+
 @Component({
   selector: 'app-login',
   standalone: true,

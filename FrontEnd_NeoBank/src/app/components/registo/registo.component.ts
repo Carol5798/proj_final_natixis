@@ -13,7 +13,7 @@ import { RegistoService } from '../../services/registo.service';
   styleUrl: './registo.component.css'
 })
 
-export class RegisterComponent {
+export class RegistoComponent {
   user = {
     nome: '',
     dataNascimento: '',
