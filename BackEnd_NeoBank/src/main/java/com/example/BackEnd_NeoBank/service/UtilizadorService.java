@@ -29,27 +29,32 @@ public class UtilizadorService {
     }
 
 
-    public void updateUser(Long id, Utilizador updatedUser) {
-        Utilizador existingUser = utilizadorRepository.findById(id)
+    public void updateUser(String email, Utilizador updatedUser) {
+        Utilizador existingUser = utilizadorRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado"));
+
         existingUser.setNome(updatedUser.getNome());
         existingUser.setDataNascimento(updatedUser.getDataNascimento());
         existingUser.setNif(updatedUser.getNif());
-        existingUser.setEmail(updatedUser.getEmail());
         existingUser.setNumeroTelemovel(updatedUser.getNumeroTelemovel());
+        existingUser.setUsername(updatedUser.getUsername());
+
+        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isBlank()) {
+            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        }
 
         utilizadorRepository.save(existingUser);
     }
 
-    public Utilizador getUser(Long id) {
-        return utilizadorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado"));
+    public Utilizador getUserByEmail(String email) {
+        return utilizadorRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado."));
     }
 
-    public void deleteUser(Long id) {
-        if (!utilizadorRepository.existsById(id)) {
-            throw new IllegalArgumentException("Utilizador não encontrado");
-        }
-        utilizadorRepository.deleteById(id);
+    public void deleteUser(String email) {
+        Utilizador existingUser = utilizadorRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado."));
+        utilizadorRepository.delete(existingUser);
     }
+
 }
