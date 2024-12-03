@@ -51,4 +51,10 @@ public class UtilizadorService {
                 .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado."));
     }
 
+    public void deleteUser(String email) {
+        Utilizador existingUser = utilizadorRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado."));
+        utilizadorRepository.delete(existingUser);
+    }
+
 }

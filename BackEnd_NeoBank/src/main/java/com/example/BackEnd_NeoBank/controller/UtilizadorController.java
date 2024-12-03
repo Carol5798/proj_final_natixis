@@ -125,4 +125,22 @@ public class UtilizadorController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+    @DeleteMapping("/me")
+    public ResponseEntity<ApiResponse> deleteUser() {
+        String authenticatedEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        try {
+            utilizadorService.deleteUser(authenticatedEmail);
+            ApiResponse response = new ApiResponse(true, "Utilizador excluído com sucesso.");
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            ApiResponse response = new ApiResponse(false, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } catch (Exception e) {
+            ApiResponse response = new ApiResponse(false, "Ocorreu um erro ao excluir o utilizador.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
 }
