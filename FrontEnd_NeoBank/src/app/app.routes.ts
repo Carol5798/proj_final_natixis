@@ -6,13 +6,15 @@ import { PrincipalComponent } from './components/principal/principal.component';
 import { TransacaoComponent } from './components/transacao/transacao.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'principal', pathMatch: 'full' },
-    { path: 'principal', component:PrincipalComponent},
-    { path: 'login', component: LoginComponent },         
+   { path: '', redirectTo: 'login', pathMatch: 'full' },
+   
+   { path: 'login', component: LoginComponent },   
+   { path: 'principal', component:PrincipalComponent},
+          
     { path: 'registo', component:RegistoComponent },
     { path: 'password-reset', component:PasswordResetComponent},
     {path: 'transacao', component:TransacaoComponent},
-    { path: '**', redirectTo: '' }                 
+   { path: '**', redirectTo: '' }                 
      
 
   ];

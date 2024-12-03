@@ -1,20 +1,10 @@
-/* Evita rolagem global, mas permite na área principal */
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
-  
-  /* Componente Principal (lado direito) */
-  .flex-grow-1 {
-    flex-grow: 1;
-    overflow-y: auto; /* Permite rolar no conteúdo principal */
-    padding: 20px;
-    height: calc(100vh - 60px); /* Ajusta a altura da área principal */
-  }
-  
-  /* Estilo do conteúdo do componente Principal */
-  .container {
-    padding-top: 20px;
-  }
-  
+/* Layout principal (lado direito) */
+:host {
+  flex-grow: 1; /* Expande para ocupar o espaço restante */
+  background-color: #ffffff;
+  overflow-y: auto; /* Scroll apenas no conteúdo principal */
+  padding: 20px;
+  height: calc(100vh - 60px); /* Altura total ajustada ao header */
+  margin-left: 250px; /* Ajusta espaço para a sidebar */
+  margin-top: 60px; /* Para alinhar com o header */
+}

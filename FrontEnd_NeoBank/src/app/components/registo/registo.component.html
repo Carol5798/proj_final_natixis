@@ -1,55 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Conta</title>
-</head>
-<body>
+
+
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow-lg" style="width: 100%; max-width: 500px;">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Registrar Conta</h2>
                 <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
-                    <!-- Username -->
+                    <!-- Full Name -->
                     <div class="mb-3">
-                        <label for="username" class="form-label">Nome de Usuário</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome de usuário" [(ngModel)]="username" required>
+                        <label for="nome" class="form-label">Nome Completo</label>
+                        <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="user.nome" placeholder="Digite seu nome completo" required>
                     </div>
-                    <!-- Email -->
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" [(ngModel)]="email" required>
-                    </div>
-                    <!-- Password -->
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" [(ngModel)]="password" required (input)="checkPasswordStrength()">
-                        <small id="password-strength" class="form-text" [ngClass]="passwordStrengthClass">{{ passwordStrengthMessage }}</small>
-                    </div>
-                    <!-- Confirm Password -->
-                    <div class="mb-3">
-                        <label for="confirm-password" class="form-label">Confirmar Senha</label>
-                        <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Confirme sua senha" [(ngModel)]="confirmPassword" required (input)="checkPasswordMatch()">
-                        <small id="password-match" class="form-text" [ngClass]="passwordMatchClass">{{ passwordMatchMessage }}</small>
-                    </div>
-                    <!-- Phone -->
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Telefone</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Digite seu telefone" [(ngModel)]="phone" required>
+                    <!-- Date of Birth (conditionally required) -->
+                    <div class="mb-3" *ngIf="user.tipoUtilizador === 1">
+                        <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                        <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" [(ngModel)]="user.dataNascimento" [required]="user.tipoUtilizador === 1">
                     </div>
                     <!-- NIF -->
                     <div class="mb-3">
                         <label for="nif" class="form-label">NIF</label>
-                        <input type="text" class="form-control" id="nif" name="nif" placeholder="Digite seu NIF" [(ngModel)]="nif" required>
+                        <input type="text" class="form-control" id="nif" name="nif" [(ngModel)]="user.nif" placeholder="Digite seu NIF" required>
                     </div>
-                    <!-- Address -->
+                    <!-- Username -->
                     <div class="mb-3">
-                        <label for="address" class="form-label">Morada</label>
-                        <textarea class="form-control" id="address" rows="3" name="address" placeholder="Digite sua morada" [(ngModel)]="address" required></textarea>
+                        <label for="username" class="form-label">Nome de Usuário</label>
+                        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" placeholder="Digite seu nome de usuário" required>
+                    </div>
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" placeholder="Digite seu email" required>
+                    </div>
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" placeholder="Digite sua senha" required (input)="checkPasswordStrength()">
+                        <small id="password-strength" class="form-text" [ngClass]="passwordStrengthClass">{{ passwordStrengthMessage }}</small>
+                    </div>
+                    <!-- Confirm Password -->
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirmar Senha</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" [(ngModel)]="user.confirmPassword" placeholder="Confirme sua senha" required (input)="checkPasswordMatch()">
+                        <small id="password-match" class="form-text" [ngClass]="passwordMatchClass">{{ passwordMatchMessage }}</small>
+                    </div>
+                    <!-- Phone Number -->
+                    <div class="mb-3">
+                        <label for="numeroTelemovel" class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" id="numeroTelemovel" name="numeroTelemovel" [(ngModel)]="user.numeroTelemovel" placeholder="Digite seu telefone" required>
+                    </div>
+                    <!-- User Type (Normal or Empresa) -->
+                    <div class="mb-3">
+                        <label for="tipoUtilizador" class="form-label">Tipo de Utilizador</label>
+                        <select class="form-control" id="tipoUtilizador" name="tipoUtilizador" [(ngModel)]="user.tipoUtilizador" (change)="onTipoUtilizadorChange()">
+                            <option value="1">Normal</option>
+                            <option value="2">Empresa</option>
+                        </select>
+                    </div>
+                    <!-- Error Message -->
+                    <div *ngIf="registrationError" class="text-danger mb-3">
+                        {{ registrationError }}
                     </div>
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-primary w-100" [disabled]="!isFormValid()" (click)="onSubmit()">Registrar</button>
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="!isFormValid()">Registrar</button>
                 </form>
                 <div class="text-center mt-3">
                     <span>Já tem uma conta? <a [routerLink]="['/login']" class="text-decoration-none">Entrar</a></span>
@@ -57,5 +68,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+
