@@ -54,8 +54,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/utilizador/register").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(corsFilter(), JwtAuthenticationFilter.class)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                // Registrar o filtro CORS antes do filtro JWT
+                .addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter.class) // Coloca o filtro CORS antes do JWT
+                // Agora, o filtro JWT será registrado com a ordem correta
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Coloca o filtro JWT antes do filtro de autenticação
+
 
         return http.build();
     }
