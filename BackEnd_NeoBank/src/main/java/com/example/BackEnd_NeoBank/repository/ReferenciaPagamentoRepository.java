@@ -11,4 +11,5 @@ public interface ReferenciaPagamentoRepository extends JpaRepository<ReferenciaP
     // Verifica se já existe uma referência específica
     Optional<ReferenciaPagamento> findByReferencia(String referencia);
     boolean existsByReferencia(String referencia);
+    Optional<ReferenciaPagamento> findByEntidadeAndReferenciaAndValor(String entidade, String referencia, float valor);
 }
