@@ -1,7 +1,6 @@
 package com.example.BackEnd_NeoBank.controller;
 
-import com.example.BackEnd_NeoBank.entity.ContaBancaria;
-import com.example.BackEnd_NeoBank.service.ContaService;
+import com.example.BackEnd_NeoBank.service.ContaBancariaService;
 import com.example.BackEnd_NeoBank.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +12,15 @@ import org.springframework.http.HttpStatus;
 @RestController
 @RequestMapping("/conta")
 @RequiredArgsConstructor
-public class ContaController {
-    private final ContaService _contaService;
+public class ContaBancariaController {
+    private final ContaBancariaService _contaBancariaService;
 
 
     @PostMapping("/criar")
     public ResponseEntity<ApiResponse> criarConta() {
         try {
-            String authenticatedEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            _contaService.criarConta(authenticatedEmail, "", 1);
+            _contaBancariaService.criarConta();
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ApiResponse(true, "Conta criada com sucesso."));
         } catch (IllegalArgumentException e) {
@@ -42,7 +40,7 @@ public class ContaController {
         try {
             String authenticatedEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            ApiResponse response = _contaService.obterContaPorEmail(authenticatedEmail);
+            ApiResponse response = _contaBancariaService.obterContaPorEmail(authenticatedEmail);
             return ResponseEntity.ok(response); // Retorna 200 OK
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
