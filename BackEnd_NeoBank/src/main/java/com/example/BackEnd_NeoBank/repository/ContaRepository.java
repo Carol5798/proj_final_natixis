@@ -18,5 +18,8 @@ public interface ContaRepository  extends JpaRepository<ContaBancaria, Long> {
     boolean existsByIban(String iban);
 
     Optional<ContaBancaria> findByUtilizador_Id(Long idUtilizador);
+
+    Optional<ContaBancaria> findByIban(String iban);
+    Optional<ContaBancaria> findByEntidade(String entidade);
 }
 
