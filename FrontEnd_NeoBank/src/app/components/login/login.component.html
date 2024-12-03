@@ -1,33 +1,51 @@
-
-
-
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card-body">
-            <h2 class="card-title text-center mb-4">Acesso</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email ou NIF</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter your email or NIF" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="rememberMe">
-                    <label class="form-check-label" for="rememberMe">
-                        <span class="checkbox-text">Lembre-se</span>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary w-100" [routerLink]="['/principal']" routerLinkActive="active">Login</button>
-            </form>
-            <div class="text-center mt-3">
-                <a [routerLink]="['/password-reset']" routerLinkActive="active" class="text-decoration-none">Esqueceu-se da password?</a>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card-body">
+        <h2 class="card-title text-center mb-4">Acesso</h2>
+        <form (ngSubmit)="login()">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email ou NIF</label>
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    placeholder="Enter your email or NIF" 
+                    [(ngModel)]="credentials.emailOrNif" 
+                    name="emailOrNif" 
+                    required>
             </div>
-            <div class="text-center mt-3">
-                <span>Ainda não possui conta? <a [routerLink]="['/registo']" routerLinkActive="active" class="text-decoration-none">Abrir conta</a></span>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    placeholder="Enter your password" 
+                    [(ngModel)]="credentials.password" 
+                    name="password" 
+                    required>
             </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">
+                    <span class="checkbox-text">Lembre-se</span>
+                </label>
+            </div>
+            <button 
+                type="submit" 
+                class="btn btn-primary w-100" 
+                [disabled]="!credentials.emailOrNif || !credentials.password">Login</button>
+        </form>
+
+        <!-- Displaying error message -->
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+        </div>
+
+        <div class="text-center mt-3">
+            <a [routerLink]="['/password-reset']" routerLinkActive="active" class="text-decoration-none">Esqueceu-se da password?</a>
+        </div>
+        <div class="text-center mt-3">
+            <span>Ainda não possui conta? <a [routerLink]="['/registo']" routerLinkActive="active" class="text-decoration-none">Abrir conta</a></span>
         </div>
     </div>
-
-
+</div>
