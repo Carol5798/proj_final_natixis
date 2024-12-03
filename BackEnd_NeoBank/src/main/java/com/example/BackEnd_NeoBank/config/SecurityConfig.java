@@ -10,6 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -25,6 +28,22 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // Definir CORS aqui para garantir que é aplicado antes da autenticação
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowCredentials(true); // Permitir envio de cookies/autenticação
+        config.addAllowedOriginPattern("*"); // Permitir todas as origens (ou especifique a origem)
+        config.addAllowedHeader("*"); // Permitir todos os cabeçalhos
+        config.addAllowedMethod("*"); // Permitir todos os métodos HTTP
+
+        source.registerCorsConfiguration("/**", config); // Aplicar a todos os endpoints
+
+        return new CorsFilter(source);
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -33,9 +52,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/utilizador/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/utilizador/register").permitAll()
-
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(corsFilter(), JwtAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
